@@ -80,7 +80,7 @@ def get_url_from_text_gg(image_url=None, image=None):
         img = base64.b64encode(image)
         api_url = GOOGLE_CLOUD_VISION_API_URL 
         req_body = {
-                'image': {'content': img},
+                'image': {'content': base64.b64encode(img).decode()},
                 'features': [{
                     'type': 'DOCUMENT_TEXT_DETECTION'
                 }],

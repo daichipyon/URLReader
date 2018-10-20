@@ -4,3 +4,4 @@ Flask-Cors==3.0.6
 line-bot-sdk==1.8.0
 python-dotenv==0.9.1
 requests==2.19.1
+google-cloud-vision==0.30.1

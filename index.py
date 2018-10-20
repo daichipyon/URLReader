@@ -48,22 +48,19 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message_text(event):
-    line_bot_api.push_message(event.source.userId, TextSendMessage(text="変換中・・・"))
     text_message = event.message.text
     if text_message.startswith("http"):
-        send_text = get_url_from_text(image_url=text_message)
+        send_text = get_url_from_text_gg(image_url=text_message)
         send_message(send_text, event)
     else:
         send_message("画像 または 画像のURLを送ってください！", event)
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_message_image(event):
-    print(type(event))
-    #line_bot_api.push_message(event.source.userId, TextSendMessage(text="変換中・・・"))
     message_content = line_bot_api.get_message_content(event.message.id)
     img_bin = io.BytesIO(message_content.content)
     try:
-        send_text = get_url_from_text(image=img_bin)
+        send_text = get_url_from_text_gg(image=img_bin)
         send_message(send_text, event)
     except:
         error_message = "URLを見つけることを出来ませんでした"

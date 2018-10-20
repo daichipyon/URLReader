@@ -1,6 +1,7 @@
 import os
 import io
 from PIL import Image
+
 import settings
 from vision import get_url_from_text
 
@@ -18,8 +19,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
-handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+line_bot_api = LineBotApi(settings.YOUR_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(settings.YOUR_CHANNEL_SECRET)
 
 
 @app.route("/callback", methods=['POST'])
@@ -58,7 +59,7 @@ def handle_message_image(event):
     message_content = line_bot_api.get_message_content(message_id)
     img_bin = io.BytesIO(message_content)
     try:
-        send_text = get_url_from_text(pil_img)
+        send_text = get_url_from_text(img_bin)
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=send_text))

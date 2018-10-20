@@ -18,10 +18,10 @@ def get_url_from_text(image_url=None, image=None):
 
         data = response.json()
         print(data)
-    elif image:
+    elif image is not None:
         headers = {'Ocp-Apim-Subscription-Key': KEY_ms, "Content-Type": "application/octet-stream"}
         params  = {'language': 'en', 'detectOrientation': 'true'}
-        response = requests.post(ocr_url, headers=headers, params=params, json=image)
+        response = requests.post(ocr_url, headers=headers, params=params, data=image)
         data = response.json()        
     else:
         return("Nothing has been sended.")

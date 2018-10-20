@@ -43,7 +43,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message_text(event):
-    text_message = text_message.message.text
+    text_message = event.message.text
     if text_message.startswith("http"):
         send_text = get_url_from_text(text_message)
         line_bot_api.reply_message(
@@ -56,7 +56,7 @@ def handle_message_text(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_message_image(event):
-    message_content = line_bot_api.get_message_content(message_id)
+    message_content = line_bot_api.get_message_content(event.message.id)
     img_bin = io.BytesIO(message_content)
     try:
         send_text = get_url_from_text(img_bin)

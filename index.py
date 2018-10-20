@@ -58,7 +58,8 @@ def handle_message_text(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_message_image(event):
-    line_bot_api.push_message(event.source.userId, TextSendMessage(text="変換中・・・"))
+    print(event)
+    #line_bot_api.push_message(event.source.userId, TextSendMessage(text="変換中・・・"))
     message_content = line_bot_api.get_message_content(event.message.id)
     img_bin = io.BytesIO(message_content.content)
     try:

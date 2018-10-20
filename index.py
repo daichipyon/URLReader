@@ -22,6 +22,11 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(settings.YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.YOUR_CHANNEL_SECRET)
 
+def send_message(message,event):
+    line_bot_api.reply_message(
+    event.reply_token,
+    TextSendMessage(text=message))
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -43,31 +48,27 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message_text(event):
+    send_message("変換中・・・", event)
     text_message = event.message.text
     if text_message.startswith("http"):
         send_text = get_url_from_text(image_url=text_message)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=send_text))
+        send_message(send_text, event)
     else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="画像 または 画像のURLを送ってください！"))
+        send_message("画像 または 画像のURLを送ってください！", event)
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_message_image(event):
+    send_message("変換中・・・", event)
     message_content = line_bot_api.get_message_content(event.message.id)
     img_bin = io.BytesIO(message_content.content)
     try:
         send_text = get_url_from_text(image=img_bin)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=send_text))
+        send_message(send_text, event)
     except:
         error_message = "URLを見つけることを出来ませんでした"
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=error_message))
+        send_message(error_message, event)
+
+
         
 if __name__ == "__main__":
     port = os.environ.get('PORT', 3333)

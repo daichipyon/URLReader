@@ -34,6 +34,7 @@ def get_url_from_text(image_url=None, image=None):
             for word in line['words']:
                 line_text += word.get('text', '')
                 line_text
+            print(line_text)
             matchOB = re.match(r"http" , line_text)
             if matchOB:
                 start_index = matchOB.start() 

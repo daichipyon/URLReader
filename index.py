@@ -3,7 +3,7 @@ import io
 from PIL import Image
 
 import settings
-from vision import get_url_from_text
+from vision import get_url_from_text_gg
 
 from flask import Flask, request, abort
 

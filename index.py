@@ -64,7 +64,10 @@ def handle_message_image(event):
             event.reply_token,
             TextSendMessage(text=send_text))
     except:
-        print("Image---Error")
+        error_message = "URLを見つけることを出来ませんでした"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=error_message))
         
 if __name__ == "__main__":
     port = os.environ.get('PORT', 3333)

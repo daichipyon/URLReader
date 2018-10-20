@@ -40,7 +40,7 @@ def get_url_from_text(image_url=None, image=None):
                 line_text_modified = line_text[start_index:]
                 text_li.append(line_text_modified)
     print(text_li)
-    return_text = "\n".join(text_li)
+    return_text = "\n\n".join(text_li)
     return(return_text)
 
 if __name__ == "__main__":

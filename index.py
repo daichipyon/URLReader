@@ -57,7 +57,6 @@ def handle_message_text(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_message_image(event):
     message_content = line_bot_api.get_message_content(event.message.id)
-    print(message_contentIm)
     img_bin = io.BytesIO(message_content.content)
     try:
         send_text = get_url_from_text(image=img_bin)

@@ -1,11 +1,11 @@
 import requests
 
-import settings
+#import settings
 
-KEY1 = settings.KEY1
+#KEY1 = settings.KEY1
 
 # locationを東アジアで登録した場合のendpoint
-endpoint = 'https://eastasia.api.cognitive.microsoft.com/vision/v1.0/ocr'
+endpoint = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/ocr'
 
 def get_text_by_ms(image_url=None, image=None):
     if image_url is None and image is None:
@@ -40,7 +40,8 @@ def get_text_by_ms(image_url=None, image=None):
 
     status = response.status_code
     data = response.json()
-
+    print(data)
+    """
     if status != 200:
 
         if data['code'] == 'InvalidImageSize':
@@ -57,7 +58,7 @@ def get_text_by_ms(image_url=None, image=None):
 
         print(status, data)
         return text
-
+    """
     text = ''
     for region in data['regions']:
         for line in region['lines']:
@@ -75,4 +76,6 @@ def get_text_by_ms(image_url=None, image=None):
 
 
 if __name__ == "__main__":
+    image_url = "https://shop.startribune.com/wp-content/uploads/2018/01/1.14vikingPAPER.jpg"
+    KEY1 = "22027da9c1544681af3d9bd9f62072b3"
     get_text_by_ms(image_url)

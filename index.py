@@ -51,6 +51,7 @@ def handle_message_text(event):
     text_message = event.message.text
     if text_message.startswith("http"):
         send_text = get_url_from_text_gg(image_url=text_message)
+        print("send_text", send_text)
         send_message(send_text, event)
     else:
         send_message("画像 または 画像のURLを送ってください！", event)

@@ -46,7 +46,7 @@ def callback():
     return 'OK'
 
 @handler.add(MessageEvent, message=FollowEvent)
-def handle_message_text(event):
+def handle_message_followed(event):
     message = "フォローありがとうございます！　ここでは画像内のURLを読み込んで返します\n画像か画像のURLを送ってください!\n問題があればこちらに問い合わせください\n→Twitter:@ichida_guchiya"
     send_message(message, event)
 

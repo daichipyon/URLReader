@@ -24,7 +24,7 @@ handler = WebhookHandler(settings.YOUR_CHANNEL_SECRET)
 
 def send_message(message,event):
     line_bot_api.reply_message(
-    event.replyToken,
+    event.reply_token,
     TextSendMessage(text=message))
 
 
@@ -47,10 +47,10 @@ def callback():
 
 @handler.add(MessageEvent, message=FollowEvent)
 def handle_message_followed(event):
-    message = "フォローありがとうございます！　ここでは画像内のURLを読み込んで返します\n画像か画像のURLを送ってください!\n問題があればこちらに問い合わせください\n→Twitter:@ichida_guchiya"
+    message_followed = "フォローありがとうございます！　ここでは画像内のURLを読み込んで返します\n画像か画像のURLを送ってください!\n問題があればこちらに問い合わせください\n→Twitter:@ichida_guchiya"
     line_bot_api.reply_message(
-    event.replyToken,
-    TextSendMessage(text=message))
+    event.reply_token,
+    TextSendMessage(text=message_followed))
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message_text(event):

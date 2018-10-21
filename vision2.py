@@ -58,14 +58,19 @@ def get_url_from_text_gg(image_url=None, image=None):
                     'type': 'DOCUMENT_TEXT_DETECTION'
                 }],
                 'imageContext':{
-                    'languageHints': "en"
+                    'languageHints': ["en", "jp"]
                 }
             }
         res = requests.post(api_url, data=json.dumps({"requests":req_body}),
                                 params={'key': KEY_gg},
                                 headers={'Content-Type': 'application/json'})
+        
+        with open('test2.json', 'w') as f:
+            json.dump(res.json(), f, indent=4)
         text = res.json()["responses"][0]["fullTextAnnotation"]["text"]
-        text_li = text.split("\n")
+        #print(text)
+        text = text.replace("\n", "")
+        print(text)
         return_li = []
         for text in text_li:
             matchOB = re.search(r"http" , text)

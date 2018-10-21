@@ -14,7 +14,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    ImageMessage, MessageEvent, TextMessage, TextSendMessage,
+    ImageMessage, MessageEvent, TextMessage, TextSendMessage, FollowEvent
 )
 
 app = Flask(__name__)
@@ -45,6 +45,10 @@ def callback():
 
     return 'OK'
 
+@handler.add(MessageEvent, message=FollowEvent)
+def handle_message_text(event):
+    message = "フォローありがとうございます！　ここでは画像内のURLを読み込んで返します\n画像か画像のURLを送ってください!\n問題があればこちらに問い合わせください\n→Twitter:@ichida_guchiya"
+    send_message(message, event)
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message_text(event):

@@ -47,6 +47,7 @@ def callback():
 
 @handler.add(MessageEvent, message=FollowEvent)
 def handle_message_followed(event):
+    print("followed")
     message_followed = "フォローありがとうございます！　ここでは画像内のURLを読み込んで返します\n画像か画像のURLを送ってください!\n問題があればこちらに問い合わせください\n→Twitter:@ichida_guchiya"
     line_bot_api.reply_message(
     event.reply_token,
